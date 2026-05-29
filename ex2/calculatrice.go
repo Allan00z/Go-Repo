@@ -1,4 +1,4 @@
-package ex2
+package main
 
 import "fmt"
 
@@ -33,31 +33,31 @@ func main() {
 	for {
 		fmt.Print("> ")
 
-		var token string
-		fmt.Scan(&token)
-
-		if token == "quit" {
-			break
-		}
-
-		// Premier input
 		var a float64
-		_, err := fmt.Sscanf(token, "%f", &a)
+		n, err := fmt.Scan(&a)
+		if n == 0 {
+			var token string
+			fmt.Scan(&token)
+			if token == "quit" {
+				break
+			}
+			fmt.Println("Erreur : premier opérande invalide")
+			continue
+		}
 		if err != nil {
 			fmt.Println("Erreur : premier opérande invalide")
 			continue
 		}
 
-		// Opérateur et deuxième nombre
-		var op string
 		var b float64
+		fmt.Scan(&b)
+
+		var op string
 		fmt.Scan(&op)
 
 		if op == "quit" {
 			break
 		}
-
-		fmt.Scan(&b)
 
 		// Opération
 		operation := creerOperation(op)
